@@ -19,8 +19,11 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+      - name: Run Maven Build
+        run: mvn clean install
+
+      - name: List Target Directory
+        run: ls -R target
 
   release:
     runs-on: ubuntu-latest
@@ -42,9 +45,8 @@ jobs:
           body: |
             Changes in this Release:
             - Add Hello World program
-      - name: List Target Directory
-        run: ls -R target
-      - name: Upload Release Artifact
+
+      - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
